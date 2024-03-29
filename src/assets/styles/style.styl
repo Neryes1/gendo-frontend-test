@@ -1,0 +1,179 @@
+$orange = #E36209;
+$brownGrey = #666666;
+$slateGrey = #5C646D;
+$warmGrey = #999999;
+$paleGrey = #E1E4E8;
+$slateGreyTwo = #586069;
+$white = #FFFFFF;
+$whiteTwo = #E3E3E3;
+$blueLink = #3598DB;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  font-family: 'Arial';
+  font-size: 10px;
+}
+
+.container {
+  max-width: 1300px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+header {
+  width: 100%;
+  background-color: $slateGrey;
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+
+    span {
+      &.header-text {
+        color: $whiteTwo;
+        font-size: 18px;
+        padding-left: 10px;
+
+        strong {
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
+section {
+  &.user-dashboard {
+    .user-content {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 50px;
+
+      .user-profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .img-profile {
+          width: 300px;
+
+          img {
+            width: 100%;
+            border-radius: 50%;
+          }
+        }
+
+        .user-info {
+          text-align: center;
+
+          h4 {
+            &.user-name {
+              font-size: 16px;
+              line-height: 24px;
+              color: $slateGrey;
+              padding-top: 10px;
+            }
+          }
+
+          span {
+            &.user-description {
+              font-size: 14px;
+              line-height: 22px;
+              color: $warmGrey;
+            }
+          }
+        }
+      }
+
+      .user-panel {
+        width: 70%;
+
+        .tab {
+          hr {
+            margin: 10px 0 30px;
+          }
+
+          a {
+            color: $slateGrey;
+            font-size: 14px;
+            padding-left: 30px;
+
+            span {
+              &.tab-num {
+                background-color: $whiteTwo;
+                font-weight: 600;
+                border-radius: 30%;
+                padding: 2px 5px;
+                margin-left: 8px;
+              }
+            }
+          }
+        }
+
+        input {
+          &.search {
+            border: 1px solid $whiteTwo;
+            border-radius: 3px;
+            padding: 8px;
+            width: 250px;
+          }
+        }
+
+        ul {
+          &.card-projects {
+
+            li{
+              position: relative;
+              padding-top: 20px;
+
+              &::after {
+                content: '';
+                display: block;
+                padding: 15px 0 10px;
+                border-bottom: 1px solid $whiteTwo;
+              }
+
+              a {
+                &.project-name {
+                  font-size: 18px;
+                  color: $blueLink;
+                }
+              }
+
+              p {
+                &.project-description {
+                  font-size: 12px;
+                  color: $warmGrey;
+                  padding-top: 10px;
+                }
+              }
+
+              .details-project {
+                padding-top: 20px;
+
+                span {
+                  font-size: 12px;
+                  color: $warmGrey;
+                  padding-right: 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
