@@ -134,8 +134,7 @@ section {
 
         ul {
           &.card-projects {
-
-            li{
+            li {
               position: relative;
               padding-top: 20px;
 
@@ -163,11 +162,28 @@ section {
 
               .details-project {
                 padding-top: 20px;
+                display: flex;
+                align-items: center;
+                
+                a{
+                  display: flex;
+                  align-items: center;
+                }
+                svg {
+                  &.UnderlineNav-octicon {
+                    fill: $warmGrey;
+                  }
+
+                  &.octicon-repo-forked {
+                    fill: $warmGrey;
+                  }
+                }
 
                 span {
                   font-size: 12px;
                   color: $warmGrey;
-                  padding-right: 10px;
+                  padding-right: 25px;
+                  padding-left: 5px;
                 }
               }
             }
