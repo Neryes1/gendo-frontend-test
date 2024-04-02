@@ -1,9 +1,47 @@
-const getUser = async () => {
+const urlUser = 'https://api.github.com/users/Neryes1';
+const urlRepo = 'https://api.github.com/users/Neryes1/repos';
 
-  const url = 'https://api.github.com/users/Neryes1/repos';
+const getUserData = async () => {
+  try {
+    const req = await fetch(urlUser);
+    const data = req.json();
+    return data;
+  }
+  catch (e) {
+    console.log('Falha na requisição', e);
+  }
+}
+
+const createDataUser = async () => {
+  const userInfo = await getUserData();
+
+  const imgProfile = document.querySelector('.img-profile');
+  const userInfoDiv = document.querySelector('.user-info');
+
+  let imgUser = document.createElement('img');
+  let userName = document.createElement('h4');
+  userName.setAttribute('class', 'user-name');
+  let userBio = document.createElement('span');;
+  userBio.setAttribute('class', 'user-bio');
+
+  try{
+    imgUser.setAttribute('src', userInfo.avatar_url);
+    userName.textContent = userInfo.login;
+    userBio.textContent = userInfo.bio;
+
+    imgProfile.appendChild(imgUser);
+    userInfoDiv.appendChild(userName);
+    userInfoDiv.appendChild(userBio);
+  }
+  catch(e){
+    console.log('Falha na requisição', e);
+  }
+}
+
+const getUserRepo = async () => {
 
   try {
-    const req = await fetch(url);
+    const req = await fetch(urlRepo);
     const data = await req.json();
 
     return data;
@@ -15,7 +53,7 @@ const getUser = async () => {
 
 const createUserElements = async () => {
 
-  const userInfo = await getUser();
+  const userInfo = await getUserRepo();
 
   const userProfile = document.querySelector('.user-profile');
 
@@ -31,13 +69,11 @@ const createUserElements = async () => {
 const createPanelUser = async () => {
 
   const cardProjects = document.querySelector('.card-projects');
-  const userInfo = await getUser();
+  const userInfo = await getUserRepo();
 
   userInfo.forEach(item => {
 
-    console.log(item.name)
-
-
+    //console.log(item.name)
 
     const li = document.createElement('li');
     li.setAttribute('class', 'project');
@@ -82,4 +118,5 @@ const createPanelUser = async () => {
 }
 
 //createUserElements();
+createDataUser();
 createPanelUser();
