@@ -110,6 +110,7 @@ section {
             color: $slateGrey;
             font-size: 14px;
             padding-left: 30px;
+            position: relative;
 
             span {
               &.tab-num {
@@ -118,6 +119,18 @@ section {
                 border-radius: 30%;
                 padding: 2px 5px;
                 margin-left: 8px;
+              }
+            }
+
+            &.active {
+              &:before {
+                content: '';
+                height: 4px;
+                left: 10px;
+                position: absolute;
+                bottom: -10px;
+                width: 100%;
+                background-color: $orange;
               }
             }
           }
@@ -164,11 +177,12 @@ section {
                 padding-top: 20px;
                 display: flex;
                 align-items: center;
-                
-                a{
+
+                a {
                   display: flex;
                   align-items: center;
                 }
+
                 svg {
                   &.UnderlineNav-octicon {
                     fill: $warmGrey;
@@ -192,4 +206,19 @@ section {
       }
     }
   }
+}
+
+.hide {
+  position: absolute!important;
+  top: 0;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, height 0s ease 0.3s;
+}
+
+.show {
+  opacity: 1;
+  height: auto;
+  transition: opacity 0.3s ease, height 0s ease 0s;
 }

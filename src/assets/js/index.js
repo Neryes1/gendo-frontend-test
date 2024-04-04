@@ -1,19 +1,107 @@
 const urlUser = 'https://api.github.com/users/Neryes1';
 const urlRepo = 'https://api.github.com/users/Neryes1/repos';
 
+let userData = null;
+let userInfoTab = null;
+
 const getUserData = async () => {
   try {
-    const req = await fetch(urlUser);
-    const data = req.json();
-    return data;
+    if (userData) {
+      return userData;
+    }
+    else {
+      const req = await fetch(urlUser);
+      userData = await req.json();
+      return userData;
+    }
   }
   catch (e) {
     console.log('Falha na requisição', e);
   }
 }
 
-const createDataUser = async () => {
-  const userInfo = await getUserData();
+const getUserRepo = async () => {
+
+  try {
+    if (userInfoTab) {
+      return userInfoTab;
+    }
+    else {
+      const req = await fetch(urlRepo);
+      userInfoTab = await req.json();
+    }
+    return userInfoTab;
+  }
+  catch (e) {
+    console.log('Falha na requisição', e);
+  }
+}
+
+const tabMenu = async () => {
+  const userData = await getUserData();
+  const userInfoTab = await getUserRepo();
+  let counter = 0;
+
+  const tab = document.querySelector('.tab');
+  let hrElement; // Mova a declaração da variável aqui
+
+  try {
+    // build tab
+    let reposLink = document.createElement('a');
+    reposLink.setAttribute('href', '#');
+    reposLink.setAttribute('class', 'repos-tab active');
+    reposLink.innerHTML = 'Repos';
+    let reposSpan = document.createElement('span');
+    reposSpan.setAttribute('class', 'tab-num');
+    reposSpan.textContent = userData.public_repos;
+
+    let starredLink = document.createElement('a');
+    starredLink.setAttribute('href', '#');
+    starredLink.setAttribute('class', 'starred-tab');
+    starredLink.innerHTML = 'Starred';
+    let starredSpan = document.createElement('span');
+    starredSpan.setAttribute('class', 'tab-num');
+
+    userInfoTab.forEach(item => {
+      counter += item.stargazers_count;
+    })
+
+    starredSpan.textContent = counter;
+
+    // check if userData is loaded
+    if (userData !== null && userData !== undefined) {
+      // if there is repository 
+      if (!(userData.public_repos.length < 1)) {
+        reposLink.appendChild(reposSpan);
+      }
+    }
+
+    // condition to avoid null 
+    if (counter > 0) {
+      starredLink.appendChild(starredSpan);
+    }
+
+    hrElement = document.createElement('hr'); // Defina hrElement aqui
+
+    tab.appendChild(reposLink);
+    tab.appendChild(starredLink);
+    tab.appendChild(hrElement);
+
+    toggleActiveMenu(tab);
+
+    // tab parameter to use active class
+    return createPanelUser(tab);
+
+  } catch (e) {
+    console.log('Falha na requisição', e);
+  }
+}
+
+/**
+ * function that loads user profile data
+ */
+const createDataUserProfile = async () => {
+  const userData = await getUserData();
 
   const imgProfile = document.querySelector('.img-profile');
   const userInfoDiv = document.querySelector('.user-info');
@@ -24,27 +112,14 @@ const createDataUser = async () => {
   let userBio = document.createElement('span');;
   userBio.setAttribute('class', 'user-bio');
 
-  try{
-    imgUser.setAttribute('src', userInfo.avatar_url);
-    userName.textContent = userInfo.login;
-    userBio.textContent = userInfo.bio;
+  try {
+    imgUser.setAttribute('src', userData.avatar_url);
+    userName.textContent = userData.login;
+    userBio.textContent = userData.bio;
 
     imgProfile.appendChild(imgUser);
     userInfoDiv.appendChild(userName);
     userInfoDiv.appendChild(userBio);
-  }
-  catch(e){
-    console.log('Falha na requisição', e);
-  }
-}
-
-const getUserRepo = async () => {
-
-  try {
-    const req = await fetch(urlRepo);
-    const data = await req.json();
-
-    return data;
   }
   catch (e) {
     console.log('Falha na requisição', e);
@@ -66,15 +141,18 @@ const createUserElements = async () => {
   userProfile.appendChild(imgProfile);
 }
 
-const createPanelUser = async () => {
+/**
+ * function to create repositories info
+ */
 
+const createPanelUser = async (tabHTML) => {
   const cardProjects = document.querySelector('.card-projects');
-  const userInfo = await getUserRepo();
+  cardProjects.textContent = '';
 
-  userInfo.forEach(item => {
+  const repoInfo = await getUserRepo();
+  const activeTab = tabHTML.querySelector('.active');
 
-    //console.log(item.name)
-
+  repoInfo.forEach(item => {
     const li = document.createElement('li');
     li.setAttribute('class', 'project');
 
@@ -102,21 +180,79 @@ const createPanelUser = async () => {
         <a href="${item.forks_url}"><svg aria-label="forks" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-repo-forked">
         <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path>
         </svg><span>${item.forks_count}</span></a>
-        `;
+    `;
 
     projectInfo.appendChild(projectName);
     projectInfo.appendChild(projectDescription);
 
     li.appendChild(projectInfo);
     li.appendChild(detailsProject);
-    cardProjects.appendChild(li);
 
+    // Verifica se a aba ativa é "Starred" e se o item tem stargazers_count > 0
+    if (activeTab.classList.contains('starred-tab') && item.stargazers_count > 0) {
+      cardProjects.appendChild(li);
+    }
+    // Verifica se a aba ativa é "Repos"
+    else if (activeTab.classList.contains('repos-tab')) {
+      cardProjects.appendChild(li);
+    }
   });
-
-  return cardProjects;
-
 }
 
-//createUserElements();
-createDataUser();
-createPanelUser();
+
+/**
+ * function to toggle the active menu
+ */
+const toggleActiveMenu = () => {
+  const links = document.querySelectorAll('.tab a');
+
+  if (links) {
+    links.forEach(link => {
+      link.addEventListener('click', function (e) {
+        const tab = document.querySelector('.tab'); // Correção: selecionando a div tab
+        links.forEach(l => l.classList.remove('active'));
+        e.target.classList.add('active');
+        createPanelUser(tab);
+      })
+    })
+  }
+}
+
+
+/**
+ * search function
+ */
+const search = () => {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  const projects = document.querySelectorAll('.project');
+
+  projects.forEach(project => {
+    const projectName = project.querySelector('.project-name').textContent.toLowerCase();
+    if (projectName.includes(searchTerm)) {
+      project.classList.add('show');
+      project.classList.remove('hide');
+    } else {
+      project.classList.add('hide');
+      project.classList.remove('show');
+    }
+  });
+};
+
+
+
+/**
+ * validation to run when hit Enter
+ */
+const searchInput = document.getElementById('searchInput');
+if (searchInput) {
+  searchInput.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      search();
+    }
+  })
+}
+
+createDataUserProfile();
+tabMenu();
+
+search();
