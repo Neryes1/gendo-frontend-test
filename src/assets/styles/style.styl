@@ -7,6 +7,18 @@ $slateGreyTwo = #586069;
 $white = #FFFFFF;
 $whiteTwo = #E3E3E3;
 $blueLink = #3598DB;
+$tabletMax = 1024px;
+$mobileMax = 768px;
+
+.line {
+  position: absolute;
+  width: 100vw;
+  border-bottom: 1px solid $paleGrey;
+
+  @media screen and (max-width: $tabletMax) {
+    left: -35px;
+  }
+}
 
 * {
   margin: 0;
@@ -24,12 +36,15 @@ ul {
 body {
   font-family: 'Arial';
   font-size: 10px;
+  position: relative;
+  overflow-x: hidden;
 }
 
 .container {
   max-width: 1300px;
   width: 90%;
   margin: 0 auto;
+  position: relative;
 }
 
 header {
@@ -62,6 +77,10 @@ section {
       justify-content: space-between;
       padding-top: 50px;
 
+      @media screen and (max-width: $mobileMax) {
+        padding-top: 10px;
+      }
+
       .user-profile {
         display: flex;
         flex-direction: column;
@@ -69,6 +88,10 @@ section {
 
         .img-profile {
           width: 300px;
+
+          @media screen and (max-width: $tabletMax) {
+            width: 85px;
+          }
 
           img {
             width: 100%;
@@ -79,12 +102,22 @@ section {
         .user-info {
           text-align: center;
 
+          @media screen and (max-width: $tabletMax) {
+            text-align: left;
+            padding-left: 20px;
+          }
+
           h4 {
             &.user-name {
               font-size: 16px;
               line-height: 24px;
               color: $slateGrey;
               padding-top: 10px;
+
+              @media screen and (max-width: $tabletMax) {
+                font-size: 20px;
+                line-height: 32px;
+              }
             }
           }
 
@@ -96,14 +129,26 @@ section {
             }
           }
         }
+
+        @media screen and (max-width: $tabletMax) {
+          flex-direction: row;
+          padding: 20px 0 60px;
+        }
+
+        @media screen and (max-width: $mobileMax) {
+          padding-bottom: 40px;
+        }
       }
 
       .user-panel {
-        width: 70%;
+        width: 70%;         /* @media screen and (max-width: $tabletMax) {
+          width: 100%;
+        } */
 
         .tab {
-          hr {
-            margin: 10px 0 30px;
+          .tab-line {
+            @extend .line;
+            padding-top: 9px;
           }
 
           a {
@@ -111,6 +156,10 @@ section {
             font-size: 14px;
             padding-left: 30px;
             position: relative;
+
+            @media screen and (max-width: $tabletMax) {
+              font-size: 16px;
+            }
 
             span {
               &.tab-num {
@@ -140,6 +189,7 @@ section {
           &.search {
             border: 1px solid $whiteTwo;
             border-radius: 3px;
+            margin-top: 50px;
             padding: 8px;
             width: 250px;
           }
@@ -148,14 +198,11 @@ section {
         ul {
           &.card-projects {
             li {
-              position: relative;
-              padding-top: 20px;
+              padding-top: 55px;
 
-              &::after {
-                content: '';
-                display: block;
-                padding: 15px 0 10px;
-                border-bottom: 1px solid $whiteTwo;
+              .card-line {
+                @extend .line;
+                padding-top: 25px;
               }
 
               a {
@@ -204,12 +251,16 @@ section {
           }
         }
       }
+
+      @media screen and (max-width: $tabletMax) {
+        flex-direction: column;
+      }
     }
   }
 }
 
 .hide {
-  position: absolute!important;
+  position: absolute !important;
   top: 0;
   opacity: 0;
   height: 0;

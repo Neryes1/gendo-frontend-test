@@ -94,7 +94,7 @@ var getUserRepo = function getUserRepo() {
 };
 
 var tabMenu = function tabMenu() {
-  var userData, userInfoTab, counter, tab, hrElement, reposLink, reposSpan, starredLink, starredSpan;
+  var userData, userInfoTab, counter, tab, reposLink, reposSpan, starredLink, starredSpan, tabLine;
   return regeneratorRuntime.async(function tabMenu$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
@@ -143,26 +143,26 @@ var tabMenu = function tabMenu() {
             starredLink.appendChild(starredSpan);
           }
 
-          hrElement = document.createElement('hr'); // Defina hrElement aqui
-
+          tabLine = document.createElement('div');
+          tabLine.setAttribute('class', 'tab-line');
           tab.appendChild(reposLink);
           tab.appendChild(starredLink);
-          tab.appendChild(hrElement);
+          tab.appendChild(tabLine);
           toggleActiveMenu(tab); // tab parameter to use active class
 
           return _context3.abrupt("return", createPanelUser(tab));
 
-        case 34:
-          _context3.prev = 34;
+        case 35:
+          _context3.prev = 35;
           _context3.t0 = _context3["catch"](8);
           console.log('Falha na requisição', _context3.t0);
 
-        case 37:
+        case 38:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[8, 34]]);
+  }, null, null, [[8, 35]]);
 };
 /**
  * function that loads user profile data
@@ -256,6 +256,8 @@ var createPanelUser = function createPanelUser(tabHTML) {
           repoInfo.forEach(function (item) {
             var li = document.createElement('li');
             li.setAttribute('class', 'project');
+            var divLine = document.createElement('div');
+            divLine.setAttribute('class', 'card-line');
             var projectInfo = document.createElement('div');
             projectInfo.setAttribute('class', 'project-info');
             var projectName = document.createElement('a');
@@ -275,7 +277,8 @@ var createPanelUser = function createPanelUser(tabHTML) {
             projectInfo.appendChild(projectName);
             projectInfo.appendChild(projectDescription);
             li.appendChild(projectInfo);
-            li.appendChild(detailsProject); // Verifica se a aba ativa é "Starred" e se o item tem stargazers_count > 0
+            li.appendChild(detailsProject);
+            li.appendChild(divLine); // Verifica se a aba ativa é "Starred" e se o item tem stargazers_count > 0
 
             if (activeTab.classList.contains('starred-tab') && item.stargazers_count > 0) {
               cardProjects.appendChild(li);
@@ -303,8 +306,7 @@ var toggleActiveMenu = function toggleActiveMenu() {
   if (links) {
     links.forEach(function (link) {
       link.addEventListener('click', function (e) {
-        var tab = document.querySelector('.tab'); // Correção: selecionando a div tab
-
+        var tab = document.querySelector('.tab');
         links.forEach(function (l) {
           return l.classList.remove('active');
         });

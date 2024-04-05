@@ -43,7 +43,6 @@ const tabMenu = async () => {
   let counter = 0;
 
   const tab = document.querySelector('.tab');
-  let hrElement; // Mova a declaração da variável aqui
 
   try {
     // build tab
@@ -81,11 +80,12 @@ const tabMenu = async () => {
       starredLink.appendChild(starredSpan);
     }
 
-    hrElement = document.createElement('hr'); // Defina hrElement aqui
+    const tabLine = document.createElement('div');
+    tabLine.setAttribute('class', 'tab-line')
 
     tab.appendChild(reposLink);
     tab.appendChild(starredLink);
-    tab.appendChild(hrElement);
+    tab.appendChild(tabLine);
 
     toggleActiveMenu(tab);
 
@@ -144,7 +144,6 @@ const createUserElements = async () => {
 /**
  * function to create repositories info
  */
-
 const createPanelUser = async (tabHTML) => {
   const cardProjects = document.querySelector('.card-projects');
   cardProjects.textContent = '';
@@ -155,6 +154,9 @@ const createPanelUser = async (tabHTML) => {
   repoInfo.forEach(item => {
     const li = document.createElement('li');
     li.setAttribute('class', 'project');
+
+    const divLine = document.createElement('div');
+    divLine.setAttribute('class', 'card-line');
 
     const projectInfo = document.createElement('div');
     projectInfo.setAttribute('class', 'project-info');
@@ -187,6 +189,7 @@ const createPanelUser = async (tabHTML) => {
 
     li.appendChild(projectInfo);
     li.appendChild(detailsProject);
+    li.appendChild(divLine);
 
     // Verifica se a aba ativa é "Starred" e se o item tem stargazers_count > 0
     if (activeTab.classList.contains('starred-tab') && item.stargazers_count > 0) {
@@ -209,7 +212,7 @@ const toggleActiveMenu = () => {
   if (links) {
     links.forEach(link => {
       link.addEventListener('click', function (e) {
-        const tab = document.querySelector('.tab'); // Correção: selecionando a div tab
+        const tab = document.querySelector('.tab');
         links.forEach(l => l.classList.remove('active'));
         e.target.classList.add('active');
         createPanelUser(tab);
