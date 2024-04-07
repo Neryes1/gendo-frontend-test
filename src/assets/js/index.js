@@ -1,6 +1,5 @@
 const urlUser = 'https://api.github.com/users/Neryes1';
 const urlRepo = 'https://api.github.com/users/Neryes1/repos';
-
 let userData = null;
 let userInfoTab = null;
 

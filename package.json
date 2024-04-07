@@ -1,9 +1,10 @@
 {
-  "scripts":{
+  "scripts": {
     "watch": "webpack --watch --mode development"
   },
   "devDependencies": {
     "css-loader": "^6.10.0",
+    "glob": "^10.3.12",
     "mini-css-extract-plugin": "^2.8.1",
     "stylus": "^0.63.0",
     "stylus-loader": "^8.1.0",

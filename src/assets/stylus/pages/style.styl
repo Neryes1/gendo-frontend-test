@@ -1,55 +1,7 @@
-$orange = #E36209;
-$brownGrey = #666666;
-$slateGrey = #5C646D;
-$warmGrey = #999999;
-$paleGrey = #E1E4E8;
-$slateGreyTwo = #586069;
-$white = #FFFFFF;
-$whiteTwo = #E3E3E3;
-$blueLink = #3598DB;
-$tabletMax = 1024px;
-$mobileMax = 768px;
-
-.line {
-  position: absolute;
-  width: 100vw;
-  border-bottom: 1px solid $paleGrey;
-
-  @media screen and (max-width: $tabletMax) {
-    left: -35px;
-  }
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-a {
-  text-decoration: none;
-}
-
-ul {
-  list-style: none;
-}
-
-body {
-  font-family: 'Arial';
-  font-size: 10px;
-  position: relative;
-  overflow-x: hidden;
-}
-
-.container {
-  max-width: 1300px;
-  width: 90%;
-  margin: 0 auto;
-  position: relative;
-}
 
 header {
   width: 100%;
-  background-color: $slateGrey;
+  background-color: $slateGreyTwo;
 
   .header-content {
     display: flex;
@@ -68,6 +20,21 @@ header {
       }
     }
   }
+}
+
+.hide {
+  position: absolute !important;
+  top: 0;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, height 0s ease 0.3s;
+}
+
+.show {
+  opacity: 1;
+  height: auto;
+  transition: opacity 0.3s ease, height 0s ease 0s;
 }
 
 section {
@@ -187,11 +154,20 @@ section {
 
         input {
           &.search {
+            color: $warmGrey;
             border: 1px solid $whiteTwo;
             border-radius: 3px;
             margin-top: 50px;
-            padding: 8px;
-            width: 250px;
+            padding: 8px 0 8px 40px;
+            width: 200px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>');
+            background-repeat: no-repeat;
+            background-position: 8px center;
+
+            &:focus {
+              border-color: $whiteTwo;
+              outline: none;
+            }
           }
         }
 
@@ -257,19 +233,4 @@ section {
       }
     }
   }
-}
-
-.hide {
-  position: absolute !important;
-  top: 0;
-  opacity: 0;
-  height: 0;
-  overflow: hidden;
-  transition: opacity 0.3s ease, height 0s ease 0.3s;
-}
-
-.show {
-  opacity: 1;
-  height: auto;
-  transition: opacity 0.3s ease, height 0s ease 0s;
 }

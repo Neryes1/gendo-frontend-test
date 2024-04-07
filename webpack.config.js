@@ -7,8 +7,8 @@ module.exports = {
   mode: 'production',
   entry: './src/main.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.resolve(process.cwd(), 'dist'),
+    filename: 'assets/js/bundle.js',
   },
   module: {
     rules: [

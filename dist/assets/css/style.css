@@ -1,20 +1,6 @@
-/*!*************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/stylus-loader/dist/cjs.js!./src/assets/styles/style.styl ***!
-  \*************************************************************************************************************************/
-.line,
-section.user-dashboard .user-content .user-panel .tab .tab-line,
-section.user-dashboard .user-content .user-panel ul.card-projects li .card-line {
-  position: absolute;
-  width: 100vw;
-  border-bottom: 1px solid #e1e4e8;
-}
-@media screen and (max-width: 1024px) {
-  .line,
-  section.user-dashboard .user-content .user-panel .tab .tab-line,
-  section.user-dashboard .user-content .user-panel ul.card-projects li .card-line {
-    left: -35px;
-  }
-}
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/stylus-loader/dist/cjs.js!./src/assets/stylus/main.styl ***!
+  \************************************************************************************************************************/
 * {
   margin: 0;
   padding: 0;
@@ -37,9 +23,23 @@ body {
   margin: 0 auto;
   position: relative;
 }
+.line,
+section.user-dashboard .user-content .user-panel .tab .tab-line,
+section.user-dashboard .user-content .user-panel ul.card-projects li .card-line {
+  position: absolute;
+  width: 100vw;
+  border-bottom: 1px solid #e1e4e8;
+}
+@media screen and (max-width: 1024px) {
+  .line,
+  section.user-dashboard .user-content .user-panel .tab .tab-line,
+  section.user-dashboard .user-content .user-panel ul.card-projects li .card-line {
+    left: -35px;
+  }
+}
 header {
   width: 100%;
-  background-color: #5c646d;
+  background-color: #586069;
 }
 header .header-content {
   display: flex;
@@ -53,6 +53,19 @@ header .header-content span.header-text {
 }
 header .header-content span.header-text strong {
   color: #fff;
+}
+.hide {
+  position: absolute !important;
+  top: 0;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, height 0s ease 0.3s;
+}
+.show {
+  opacity: 1;
+  height: auto;
+  transition: opacity 0.3s ease, height 0s ease 0s;
 }
 section.user-dashboard .user-content {
   display: flex;
@@ -154,11 +167,19 @@ section.user-dashboard .user-content .user-panel .tab a.active:before {
   background-color: #e36209;
 }
 section.user-dashboard .user-content .user-panel input.search {
+  color: #999;
   border: 1px solid #e3e3e3;
   border-radius: 3px;
   margin-top: 50px;
-  padding: 8px;
-  width: 250px;
+  padding: 8px 0 8px 40px;
+  width: 200px;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2224%22%20height=%2224%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22%23666666%22%20stroke-width=%222%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%3E%3Ccircle%20cx=%2211%22%20cy=%2211%22%20r=%228%22/%3E%3Cline%20x1=%2221%22%20y1=%2221%22%20x2=%2216.65%22%20y2=%2216.65%22/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 8px center;
+}
+section.user-dashboard .user-content .user-panel input.search:focus {
+  border-color: #e3e3e3;
+  outline: none;
 }
 section.user-dashboard .user-content .user-panel ul.card-projects li {
   padding-top: 55px;
@@ -200,19 +221,6 @@ section.user-dashboard .user-content .user-panel ul.card-projects li .details-pr
   section.user-dashboard .user-content {
     flex-direction: column;
   }
-}
-.hide {
-  position: absolute !important;
-  top: 0;
-  opacity: 0;
-  height: 0;
-  overflow: hidden;
-  transition: opacity 0.3s ease, height 0s ease 0.3s;
-}
-.show {
-  opacity: 1;
-  height: auto;
-  transition: opacity 0.3s ease, height 0s ease 0s;
 }
 
 
