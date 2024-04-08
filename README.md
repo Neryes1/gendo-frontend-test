@@ -41,7 +41,7 @@ https://scene.zeplin.io/project/5b48f7870acff10844983114
 1. Suba o repositório no seu Github e envie o link com o assunto: **Teste Front-End** para Juliano Baladão [jbaladao@gendo.com.br](mailto:jbaladao@gendo.com.br)
 
 
-# Atutalização do README
+## Atutalização do README
 
 ## Instalação
 Para instalar e configurar o projeto, siga estas etapas:
