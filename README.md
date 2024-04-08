@@ -2,7 +2,6 @@
 Este repositório tem como fim testar os candidatos para vaga de front-end developer na empresa [Gendo](https://gendo.com.br).
 > Para esta vaga buscamos alguém apaixonado por HTML, CSS, JavaScript e atento aos detalhes!
 
-
 ## Instruções Básicas
 1. Faça um fork deste repositório
 2. Implemente o HTML e CSS de forma que fique fiel ao layout
@@ -40,3 +39,32 @@ https://scene.zeplin.io/project/5b48f7870acff10844983114
 
 ## Envio do teste
 1. Suba o repositório no seu Github e envie o link com o assunto: **Teste Front-End** para Juliano Baladão [jbaladao@gendo.com.br](mailto:jbaladao@gendo.com.br)
+
+
+# Atutalização do README
+
+## Instalação
+Para instalar e configurar o projeto, siga estas etapas:
+
+1. Clone este repositório em sua máquina local.
+2. Abra o terminal e navegue até o diretório do projeto.
+3. Execute o comando npm install para instalar todas as dependências listadas no package.json.
+4. Após a instalação das dependências, você pode executar o comando npm run watch para iniciar o modo de desenvolvimento com webpack.
+
+Certifique-se de ter o Node.js e o npm instalados em sua máquina antes de prosseguir com a instalação.
+
+## Scripts Disponíveis
+No diretório do projeto, você pode executar os seguintes scripts:
+
+`npm run watch`
+
+Executa o webpack no modo de desenvolvimento, assistindo as alterações nos arquivos e recompilando automaticamente.
+
+## Dependências de Desenvolvimento
+* css-loader: ^6.10.0
+* glob: ^10.3.12
+* mini-css-extract-plugin: ^2.8.1
+* stylus: ^0.63.0
+* stylus-loader: ^8.1.0
+* webpack: ^5.91.0
+* webpack-cli: ^5.1.4
